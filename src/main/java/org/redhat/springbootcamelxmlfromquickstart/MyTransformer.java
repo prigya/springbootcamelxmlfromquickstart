@@ -16,23 +16,32 @@
  */
 package org.redhat.springbootcamelxmlfromquickstart;
 
-import org.springframework.stereotype.Component;
 
-/**
- * A sample transform
- */
-@Component(value = "myTransformer")
-public class MyTransformer {
 
-    public String transform() {
-        // let's return a random string
-        StringBuffer buffer = new StringBuffer();
-        for (int i = 0; i < 3; i++) {
-            int number = (int) (Math.round(Math.random() * 1000) % 10);
-            char letter = (char) ('0' + number);
-            buffer.append(letter);
-        }
-        return buffer.toString();
+import org.apache.camel.Exchange;
+import org.apache.camel.Processor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+
+public class MyTransformer implements Processor {
+
+
+    private Logger log = LoggerFactory.getLogger(MyTransformer.class);
+
+    public void process(Exchange exchange) throws Exception {
+    	
+    	
+		             //getting the request object
+					 String req = (String) exchange.getIn().getBody();
+		             System.out.println("Message Body from prigya's service :" + req);
+		             //req = req.substring(1,req.length()-1);
+		             System.out.println("req =" + req);
+		             exchange.getOut().setHeader(Exchange.CONTENT_TYPE, "application/json");
+			            // exchange.getOut().setBody("{\"id\":\"01\",\"name\":\"Joe\",\"age\":32}");
+			         exchange.getOut().setBody(req);
+				
+    	
     }
 
 }

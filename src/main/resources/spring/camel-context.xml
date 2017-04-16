@@ -3,6 +3,7 @@
     xmlns:camel="http://camel.apache.org/schema/spring"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd        http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd">
     <!-- Define a traditional camel context here -->
+    <bean class="org.redhat.springbootcamelxmlfromquickstart.MyTransformer" id="beanService"/>
     <camelContext id="camel" xmlns="http://camel.apache.org/schema/spring">
         <route id="empdetailservice-to-timerecordservice">
             <from id="_from1" uri="timer:foo?fixedRate=true;period=5000;delay=3000"/>
